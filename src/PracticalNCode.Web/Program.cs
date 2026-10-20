@@ -1,0 +1,14 @@
+using PracticalNCode.Application.Abstractions.Repositories;
+using PracticalNCode.Application.Abstractions.Services;
+using PracticalNCode.Application.Services;
+using PracticalNCode.Infrastructure.Repositories;
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IDbConnectionFactory>(_ => new SqlConnectionFactory(builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty));
+builder.Services.AddScoped<IAiModelRepository, AiModelRepository>();
+builder.Services.AddScoped<IAiModelService, AiModelService>();
+var app = builder.Build();
+if (!app.Environment.IsDevelopment()) app.UseHsts();
+app.UseHttpsRedirection(); app.UseStaticFiles(); app.UseRouting();
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+app.Run();

@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "PracticalNCode.Web",
+    "Projects": [
+      {
+        "Path": "src\\PracticalNCode.Web\\PracticalNCode.Web.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

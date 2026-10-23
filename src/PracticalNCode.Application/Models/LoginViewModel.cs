@@ -1,0 +1,20 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace PracticalNCode.Application.Models;
+
+public sealed class LoginViewModel
+{
+    [Required(ErrorMessage = "Username is required.")]
+    [StringLength(100, ErrorMessage = "Username cannot exceed 100 characters.")]
+    [Display(Name = "Username")]
+    public string Username { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "Password is required.")]
+    [DataType(DataType.Password)]
+    [Display(Name = "Password")]
+    public string Password { get; set; } = string.Empty;
+
+    [Display(Name = "Remember Me")]
+    public bool RememberMe { get; set; }
+}
+

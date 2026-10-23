@@ -1,0 +1,82 @@
+@model PracticalNCode.Application.Models.EmployeeProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-0 fw-bold">Employee Information</h4>
+                  
+                </div>
+                <span class="badge bg-info text-dark">Employee Portal</span>
+            </div>
+            <div class="card-body p-4">
+                <div class="alert alert-info py-2 small mb-4">
+                    Your profile information is managed by your organization. This is a read-only view.
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Employee ID</label>
+                        <p class="fs-5 fw-bold text-dark mb-0">@Model.EmployeeCode</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Employee Name</label>
+                        <p class="fs-5 fw-bold text-dark mb-0">@Model.FullName</p>
+                    </div>
+
+                    <div class="col-12"><hr class="my-1 text-muted" /></div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Email Address</label>
+                        <p class="fs-6 mb-0">@Model.Email</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Mobile Number</label>
+                        <p class="fs-6 mb-0">@Model.MobileNumber</p>
+                    </div>
+
+                    <div class="col-12"><hr class="my-1 text-muted" /></div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Department</label>
+                        <p class="fs-6 mb-0">@Model.Department</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Designation</label>
+                        <p class="fs-6 mb-0">@Model.Designation</p>
+                    </div>
+
+                    <div class="col-12"><hr class="my-1 text-muted" /></div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Organization</label>
+                        <p class="fs-6 fw-semibold text-primary mb-0">@Model.OrganizationName</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="text-muted small fw-semibold">Record Registered</label>
+                        <p class="fs-6 text-muted mb-0">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+                    </div>
+
+                    @if (Model.UpdatedAt.HasValue)
+                    {
+                        <div class="col-12">
+                            <small class="text-muted">Last Updated: @Model.UpdatedAt.Value.ToString("yyyy-MM-dd HH:mm")</small>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card-footer bg-light text-end py-3">
+                <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-danger btn-sm">Log Out</a>
+            </div>
+        </div>
+    </div>
+</div>
+

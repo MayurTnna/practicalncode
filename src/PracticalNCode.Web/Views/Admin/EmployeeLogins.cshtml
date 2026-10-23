@@ -1,0 +1,92 @@
+@model IReadOnlyList<PracticalNCode.Application.Models.EmployeeItemViewModel>
+@{
+    ViewData["Title"] = "Employee Logins";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">Employee Login Management</h2>
+        <p class="text-muted mb-0">Link login credentials to existing employee records across organizations</p>
+    </div>
+    <div>
+        <a asp-action="CreateEmployeeLogin" class="btn btn-primary me-2">
+            + Create Employee Login
+        </a>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3">
+        <h5 class="mb-0 fw-bold">All Employees</h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Organization</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th>Login Status</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="9" class="text-center py-4 text-muted">
+                                No employees found. Organizations must add employees first before logins can be created.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var emp in Model)
+                        {
+                            <tr>
+                                <td class="fw-semibold">@emp.EmployeeCode</td>
+                                <td>@emp.FullName</td>
+                                <td><span class="badge bg-light text-dark border">@emp.OrganizationName</span></td>
+                                <td>@emp.Email</td>
+                                <td>@emp.MobileNumber</td>
+                                <td>@emp.Department</td>
+                                <td>@emp.Designation</td>
+                                <td>
+                                    @if (emp.HasLoginAccount)
+                                    {
+                                        <span class="badge bg-success">Login Created</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">No Login</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    @if (!emp.HasLoginAccount)
+                                    {
+                                        <a asp-action="CreateEmployeeLogin" asp-route-employeeId="@emp.EmployeeId" class="btn btn-sm btn-primary">
+                                            Create Login
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">Linked</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
